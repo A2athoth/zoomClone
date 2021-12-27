@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Zoom Clone useing WebRTC and Websockets",
   "license": "MIT",
-  "script": {
+  "scripts": {
     "dev": "nodemon"
   },
   "devDependencies": {
