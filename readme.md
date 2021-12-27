@@ -43,4 +43,20 @@ src/server.js 수정
 
 
 
-npm run dev 하면 서버 돌아감
+### npm run dev 하면 서버 돌아감
+
+nodemon.json에 이렇게 수정하면 public 안에 파일들 수정해도 서버 재시작 안됨
+{
+"ignore": ["src/public/*"],
+"exec": "babel-node src/server.js"
+}
+
+
+### http와 ws 서버 동시 사용
+zoom 강의 1.2참조
+
+http서버 위에 webSocket서버 만듬(당연히 항상 그래야하는건 아님. 하나만 필요시 그래도 됨)
+이러는 이유는 우리의 서버를 만들고(보이게 노출) 그 다음 http서버 위에 ws 서버를 만들기 위해
+
+http://localhost:3000
+ws://localhost:3000
