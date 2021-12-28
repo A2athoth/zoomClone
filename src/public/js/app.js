@@ -1,7 +1,15 @@
 const messageList = document.querySelector("ul");
 const nickForm = document.querySelector("#nick");
+const currentNick = document.querySelector("#currentNick");
+const nickNameBtn = document.querySelector("#nickNameBtn");
 const messageForm = document.querySelector("#message");
-const socket = new WebSocket(`ws://${window.location.host}`);
+
+let socket;
+if (window.location.protocol === 'http:') {
+    socket = new WebSocket(`ws://${window.location.host}`);
+} else if (window.location.protocol === 'https:') {
+    socket = new WebSocket(`wss://${window.location.host}`);
+}
 
 function makeMessage(type, payload) {
     const msg = { type, payload };
@@ -35,7 +43,9 @@ function handleNickSubmit(event) {
     event.preventDefault();
     const input = nickForm.querySelector("input");
     socket.send(makeMessage("nickname", input.value));
+    currentNick.innerText = `Current Nickname: ${input.value}`;
     input.value = "";
+    nickNameBtn.innerText = "Change";
 }
 
 messageForm.addEventListener("submit", handleSubmit);
