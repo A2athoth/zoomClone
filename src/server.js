@@ -14,11 +14,12 @@ const httpServer = http.createServer(app);
 const wsServer = SocketIO(httpServer);      // 이렇게 세팅한것만으로 localhost:3000/socket.io/socket.io.js  접근이 가능
 
 wsServer.on("connection", (socket) => {
+    socket.onAny((event) => {
+        console.log(`Socket Event: ${event}`);
+    });
     socket.on("enter_room", (roomName, done) => {
-        console.log(roomName);
-        setTimeout(() => {
-            done("hello from the backend");
-        }, 15000);
+        socket.join(roomName);
+        done();
     });
 });
 
