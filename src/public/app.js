@@ -50,7 +50,7 @@ function showRoom() {
 
 function handleRoomSubmit(event) {
     event.preventDefault();
-    const input = form.querySelector("input");
+    const input = welcome.querySelector("#welcome input");
     socket.emit("enter_room", input.value, showRoom);
     roomName = input.value;
     input.value = "";
