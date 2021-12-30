@@ -29,6 +29,7 @@ function publicRooms() {
 }
 
 wsServer.on("connection", (socket) => {
+    wsServer.sockets.emit("room_change", publicRooms());  // initial room list check
     socket["nickname"] = "Unknown";
     socket.onAny((event) => {
         console.log(`Socket Event: ${event}`);
