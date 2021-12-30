@@ -28,8 +28,13 @@ function handleMessageSubmit(event) {
 function handleNicknameSubmit(event) {
     event.preventDefault();
     const input = room.querySelector("#name input");
-    socket.emit("nickname", input.value);
+    const value = input.value;
+    socket.emit("nickname", input.value, roomName, () => {
+        addMessage(`You changed your nickname to "${value}"`);
+    });
     input.value = "";
+    document.querySelector("#nickNameBtn").innerText = "Change";
+    document.querySelector("#currentNickname").innerText = " "+value;
 }
 
 function showRoom() {
@@ -61,3 +66,17 @@ socket.on("leave", (user) => {
 });
 
 socket.on("new_message", addMessage);
+
+socket.on("room_change", (rooms)=>{
+    console.log(rooms);
+    const roomList = welcome.querySelector("ul");
+    roomList.innerText = "";
+    if (rooms.length === 0) {
+        return
+    }
+    rooms.forEach((room)=>{
+        const li = document.createElement("li");
+        li.innerText = room;
+        roomList.append(li);
+    });
+})

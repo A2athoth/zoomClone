@@ -18,10 +18,13 @@ html(lang="en")
                 ul
             div#room
                 h3
-                ul
                 form#name
+                    div
+                        span Current Nickname :
+                        span#currentNickname [Unknown]
                     input(placeholder="nickname", required, type="text")
-                    button Save
+                    button#nickNameBtn Save
+                ul
                 form#msg
                     input(placeholder="message", required, type="text")
                     button Send

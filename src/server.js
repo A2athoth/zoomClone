@@ -51,8 +51,10 @@ wsServer.on("connection", (socket) => {
         socket.to(room).emit("new_message", `${socket.nickname} : ${msg}`);
         done();
     });
-    socket.on("nickname", (nickname) => {
-        (socket["nickname"] = nickname)
+    socket.on("nickname", (nickname, room, done) => {
+        socket.to(room).emit("new_message", `${socket.nickname} changed the nickname to "${nickname}"`);
+        socket["nickname"] = nickname;
+        done();
     });
 });
 
