@@ -37,11 +37,15 @@ function handleNicknameSubmit(event) {
     document.querySelector("#currentNickname").innerText = " "+value;
 }
 
-function showRoom() {
+function showRoom(count) {
     welcome.hidden = true;
     room.hidden = false;
     const h3 = room.querySelector("h3");
-    h3.innerText = `Room ${roomName}`;
+    if (!!count) {
+        h3.innerText = `Room ${roomName} (${count}명)`;
+    } else {
+        h3.innerText = `Room ${roomName}`;
+    }
     const msgForm = room.querySelector("#msg");
     const nameForm = room.querySelector("#name");
     msgForm.addEventListener("submit", handleMessageSubmit);
@@ -57,11 +61,15 @@ function handleRoomSubmit(event) {
 }
 
 form.addEventListener("submit", handleRoomSubmit);
-socket.on("welcome", (user) => {
+socket.on("welcome", (user, newCount) => {
+    const h3 = room.querySelector("h3");
+    h3.innerText = `Room ${roomName} (${newCount}명)`;
     addMessage(`${user} arrived!`);
 });
 
-socket.on("leave", (user) => {
+socket.on("bye", (left, newCount) => {
+    const h3 = room.querySelector("h3");
+    h3.innerText = `Room ${roomName} (${newCount}명)`;
     addMessage(`${user} left ㅠㅠ`);
 });
 
