@@ -60,3 +60,15 @@ http서버 위에 webSocket서버 만듬(당연히 항상 그래야하는건 아
 
 http://localhost:3000
 ws://localhost:3000
+
+### admin ui  사용법
+
+서버 돌리기
+
+private 브라우져에서 https://admin.socket.io/ 들어가기
+
+서버 url : http://localhost:3000/admin
+
+path : 없앰
+
+connect
