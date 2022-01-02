@@ -12,9 +12,7 @@ let cameraOff = false;
 async function getCameras() {
     try {
         const devices = await navigator.mediaDevices.enumerateDevices();
-        console.log('device-',devices)
-        document.body.innerText = devices.toString();
-        const cameras = devices.filter((device) => device);
+        const cameras = devices.filter((device) => device.kind === "videoinput");
         cameras.forEach((camera) => {
             const option = document.createElement("option");
             option.value = camera.deviceId;
