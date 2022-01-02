@@ -100,6 +100,16 @@ camerasSelect.addEventListener("input", handleCameraChange);
 const welcome = document.getElementById("welcome");
 const welcomeForm = welcome.querySelector("form");
 
+function checkUserCount(count) {
+    console.log('count(client)-',count);
+    if (count >= 2) {
+        alert('The Room is already full!(max 2 users per room)');
+        location.reload();
+    } else {
+        document.getElementById('call').style.visibility = 'visible';
+    }
+}
+
 async function initCall() {
     welcome.hidden = true;
     call.hidden = false;
@@ -111,7 +121,7 @@ async function handleWelcomeSubmit(event) {
     event.preventDefault();
     const input = welcomeForm.querySelector("input");
     await initCall();
-    socket.emit("join_room", input.value);
+    socket.emit("join_room", input.value, checkUserCount);
     roomName = input.value;
     input.value = "";
 }

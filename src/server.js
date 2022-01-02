@@ -13,10 +13,16 @@ app.get("/*", (_, res) => res.redirect("/"));
 const httpServer = http.createServer(app);
 const wsServer = SocketIO(httpServer);
 
+function countRoom(roomName) {
+    return wsServer.sockets.adapter.rooms.get(roomName)?.size;
+}
+
 wsServer.on("connection", (socket) => {
-    socket.on("join_room", (roomName) => {
-        socket.join(roomName);
-        socket.to(roomName).emit("welcome");
+    socket.on("join_room", async (roomName, done) => {
+        const userCount = await countRoom(roomName);
+        await done(userCount);
+        await socket.join(roomName);
+        await socket.to(roomName).emit("welcome");
     });
     socket.on("offer", (offer, roomName) => {
         socket.to(roomName).emit("offer", offer);

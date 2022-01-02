@@ -1,10 +1,43 @@
-#welcome {text-align:center;}
-#welcome form {margin:0 auto; text-align:center;}
-#welcome form input {margin:0 auto; text-align:center;}
-#videos {margin:0 auto; text-align:center;}
-#videos>div {display:inline-block;width: 50%;min-width:400px;border:1px solid black;box-sizing:border-box;}
-#videos>div>* {display:block;}
-#videos video {margin:0 auto;}
-#myStream {text-align:center;}
-button {margin: 15px;}
-#cameras {margin:0 auto;width:100%; max-width:500px;text-align:center;}
+#welcome {
+  text-align: center;
+}
+#welcome form {
+  margin: 0 auto;
+  text-align: center;
+}
+#welcome form input {
+  margin: 0 auto;
+  text-align: center;
+}
+#videos {
+  margin: 0 auto;
+  text-align: center;
+}
+#videos > div {
+  display: inline-block;
+  width: 50%;
+  min-width: 400px;
+  border: 1px solid black;
+  box-sizing: border-box;
+}
+#videos > div > * {
+  display: block;
+}
+#videos video {
+  margin: 0 auto;
+}
+#myStream {
+  text-align: center;
+}
+button {
+  margin: 15px;
+}
+#cameras {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+}
+#call {
+  visibility: hidden;
+}
